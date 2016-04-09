@@ -1,0 +1,189 @@
+25071	Restaurants
+2851	Fast Food
+2657	Pizza
+2533	Nightlife
+2515	Mexican
+2423	Bars
+2416	American (Traditional)
+2364	Sandwiches
+2101	Food
+1848	Italian
+1774	Burgers
+1629	Chinese
+1593	American (New)
+1369	Breakfast & Brunch
+1002	Cafes
+848	Japanese
+798	Sushi Bars
+684	Chicken Wings
+682	Delis
+665	Seafood
+598	Steakhouses
+596	Sports Bars
+571	Mediterranean
+565	Coffee & Tea
+552	Barbeque
+531	Asian Fusion
+525	Thai
+461	French
+431	Pubs
+429	Indian
+424	Buffets
+417	Greek
+372	Salad
+353	Bakeries
+351	Vietnamese
+322	Tex-Mex
+311	Diners
+291	Vegetarian
+267	Hot Dogs
+254	Middle Eastern
+253	Wine Bars
+223	Canadian (New)
+222	Korean
+219	Specialty Food
+215	Lounges
+184	Latin American
+177	German
+173	Gluten-Free
+172	Vegan
+168	Ice Cream & Frozen Yogurt
+165	Desserts
+165	Gastropubs
+164	Southern
+160	British
+151	Juice Bars & Smoothies
+141	Hawaiian
+131	Soup
+126	Bagels
+118	Food Trucks
+113	Tapas/Small Plates
+112	Fish & Chips
+110	Tapas Bars
+106	Cocktail Bars
+100	Caribbean
+100	Comfort Food
+100	Soul Food
+99	Ethnic Food
+90	Cajun/Creole
+90	Pakistani
+84	Spanish
+78	Beer, Wine & Spirits
+76	Food Stands
+76	Irish
+74	Creperies
+74	Turkish
+73	Filipino
+72	Breweries
+69	Portuguese
+67	Brasseries
+66	Cheesesteaks
+62	Dive Bars
+58	Modern European
+56	Dim Sum
+49	Peruvian
+47	Halal
+43	Taiwanese
+43	Lebanese
+42	Persian/Iranian
+40	African
+39	Food Delivery Services
+39	Scottish
+38	Street Vendors
+35	Kebab
+34	Cuban
+34	Brazilian
+34	Ramen
+34	Donuts
+33	Kosher
+33	Food Court
+30	Tea Rooms
+30	Szechuan
+28	Ethiopian
+28	Hookah Bars
+27	Mongolian
+27	Beer Garden
+26	Bistros
+26	Cantonese
+25	Salvadoran
+23	Moroccan
+23	Polish
+22	Poutineries
+19	Fondue
+19	Cheese Shops
+18	Belgian
+18	International
+18	Jazz & Blues
+17	Russian
+17	Basque
+16	Bubble Tea
+16	Live/Raw Food
+16	Afghan
+16	Colombian
+14	Do-It-Yourself Food
+14	Himalayan/Nepalese
+13	Falafel
+13	Hot Pot
+12	Beer Gardens
+11	Arabian
+11	Baden
+10	Shaved Ice
+10	Scandinavian
+10	Chicken Shop
+10	Malaysian
+9	Patisserie/Cake Shop
+9	Cambodian
+8	Chocolatiers & Shops
+8	Argentine
+8	Venezuelan
+7	Indonesian
+7	Gelato
+7	Delicatessen
+6	Puerto Rican
+6	Irish Pub
+6	Gay Bars
+6	Serbo Croatian
+5	Teppanyaki
+5	Beer Bar
+5	Local Flavor
+5	Shanghainese
+5	Laotian
+5	Egyptian
+5	Cafeteria
+4	Dominican
+4	Bangladeshi
+4	Burmese
+4	Wineries
+4	Art Galleries
+4	Curry Sausage
+3	Pasta Shops
+3	Sri Lankan
+3	Uzbek
+3	Singaporean
+3	Hungarian
+3	Fruits & Veggies
+3	Australian
+3	Ukrainian
+2	Austrian
+2	Macarons
+2	Czech
+2	Herbs & Spices
+2	Pub Food
+2	Bavarian
+2	Alsatian
+2	Cupcakes
+2	Champagne Bars
+2	Empanadas
+1	Swiss Food
+1	Pita
+1	Oriental
+1	Pretzels
+1	Armenian
+1	Beer Hall
+1	Palatine
+1	Eastern European
+1	Slovakian
+1	Haitian
+1	Wok
+1	Trinidadian
+1	Iberian
