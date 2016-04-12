@@ -21,17 +21,18 @@ def get_similarity(user_1, user_2):
 	similarity = 0.0
 	for business_id in common_business:
 		similarity += (get_rating(user_1, business_id) - get_rating(user_2, business_id)) ** 2
-	return similarity/len(common_business)
+	return similarity/( len(common_business) * 25)
 
 def get_predicted_rating_for_business(user_id, business_id):
 	similar_users = data.business_to_user[business_id]
-	predicted_rating = get_b_ur(user_id, business_id)
+	predicted_rating = 0.0
 	
 	for (similar_user_id, rating) in similar_users:
 		r_ir = rating
 		b_ur = get_b_ur(similar_user_id, business_id)
 		predicted_rating += ((r_ir - b_ur) * get_similarity(user_id, similar_user_id))
-	return predicted_rating
+	#predicted_rating  = predicted_rating / len(similar_users)
+	return predicted_rating + get_b_ur(user_id, business_id)
 
 def get_top_predicted_list(user_id, business_to_check, number_of_prediction):
 	top_business = Heap(number_of_prediction)
@@ -53,14 +54,19 @@ def get_visited_business_for_user(user_id):
 		visited_business.add(record[0])
 	return visited_business
 
+def get_nearby_business(location):
+	# Return list of business_id
+	return data.business_rating.keys()
+
 def main():
-	if len(sys.argv) != 3:
-		print "python targetedAdsRecommender.py <encrypted_user_id> <Number of Predictions>"
+	if len(sys.argv) != 4:
+		print "python targetedAdsRecommender.py <encrypted_user_id> <location> <Number of Predictions>"
 		exit(1)
 	user_id = sys.argv[1]
-	number_of_prediction = int(sys.argv[2])
+	location = sys.argv[2]
+	number_of_prediction = int(sys.argv[3])
 	visited_business = get_visited_business_for_user(user_id)
-	business_to_check = Set(data.business_rating.keys()) - visited_business
+	business_to_check = Set(get_nearby_business(location)) - visited_business
 	for business in get_top_predicted_list(user_id, list(business_to_check), number_of_prediction):
 		print business
 
