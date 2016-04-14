@@ -6,7 +6,7 @@ from collections import defaultdict
 user_to_business = {}
 business_to_user = {}
 category_to_business = {}
-
+business_info = defaultdict(dict)
 def load_u():
 	with open("preprocess/mu.csv", 'rb') as csvfile:
 		u_value_file = csv.reader(csvfile, delimiter=',')
@@ -53,16 +53,17 @@ def load_business_to_user_mapping():
 		return business_to_user
 	return None
 
-# def load_business_info():
-# 	business = defaultdict(dict)
-# 	with open("preprocess/restaurants.json", 'r') as f:
-# 		for line in f:
-# 			json_object = json.loads(line)
-# 			business['business_id'] = {'categories': json_object['categories'], \
-# 									   'full_address': json_object['full_address'],
-# 									   'latitude': json_object['latitude'],
-# 									   'longitude': json_object['longitude']}
-# 	return business
+def load_business_info():
+	global business_info
+	# business = defaultdict(dict)
+	with open("preprocess/restaurants.json", 'r') as f:
+		for line in f:
+			json_object = json.loads(line)
+			business_info['business_id'] = {'categories': json_object['categories'], \
+									   'full_address': json_object['full_address'],
+									   'latitude': json_object['latitude'],
+									   'longitude': json_object['longitude']}
+	return None
 
 def load_category_to_business_mapping():
 	global category_to_business
@@ -79,6 +80,7 @@ thread.start_new_thread(load_business_to_user_mapping,())
 """
 load_business_to_user_mapping()
 load_user_to_business_mapping()
+load_business_info()
 load_category_to_business_mapping()
 
 u_ = load_u() 
