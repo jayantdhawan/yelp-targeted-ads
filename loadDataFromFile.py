@@ -59,8 +59,12 @@ def load_business_info():
 	with open("preprocess/restaurants.json", 'r') as f:
 		for line in f:
 			json_object = json.loads(line)
+			full_address = json_object['full_address']
+			idx = address.rindex(',')
+			address = '_'.join(full_address[0:idx].strip().split())
+			zip_code = '_'.join(full_address[idx+1:].strip().split())
 			business_info['business_id'] = {'categories': json_object['categories'], \
-									   'full_address': json_object['full_address'],
+									   'full_address': (address, zip_code)),
 									   'latitude': json_object['latitude'],
 									   'longitude': json_object['longitude']}
 	return None
