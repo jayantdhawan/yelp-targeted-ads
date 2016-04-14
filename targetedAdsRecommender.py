@@ -1,4 +1,5 @@
 import loadDataFromFile as data
+import locationService as loc
 import sys
 from sets import Set
 from heap import Heap
@@ -31,7 +32,7 @@ def get_predicted_rating_for_business(user_id, business_id):
 		r_ir = rating
 		b_ur = get_b_ur(similar_user_id, business_id)
 		predicted_rating += ((r_ir - b_ur) * get_similarity(user_id, similar_user_id))
-	#predicted_rating  = predicted_rating / len(similar_users)
+	predicted_rating  = predicted_rating / len(similar_users)
 	return predicted_rating + get_b_ur(user_id, business_id)
 
 def get_top_predicted_list(user_id, business_to_check, number_of_prediction):
@@ -56,15 +57,18 @@ def get_visited_business_for_user(user_id):
 
 def get_nearby_business(location):
 	# Return list of business_id
-	return data.business_rating.keys()
+	lat_lng_json = loc.get_latitude_and_longitude_by_location(location)
+	business_id_list = loc.get_nearby_business_id(lat_lng_json['lat'], lat_lng_json['lng'], 5)
+	return business_id_list
+	# return data.business_rating.keys()
 
 def main():
 	if len(sys.argv) != 4:
-		print "python targetedAdsRecommender.py <encrypted_user_id> <location> <Number of Predictions>"
+		print "python targetedAdsRecommender.py <encrypted_user_id> <Number of Predictions> <location format(use underline between words: 530_Brookline_Blvd_PA_15226)>"
 		exit(1)
 	user_id = sys.argv[1]
-	location = sys.argv[2]
-	number_of_prediction = int(sys.argv[3])
+	number_of_prediction = int(sys.argv[2])
+	location = sys.argv[3]
 	visited_business = get_visited_business_for_user(user_id)
 	business_to_check = Set(get_nearby_business(location)) - visited_business
 	for business in get_top_predicted_list(user_id, list(business_to_check), number_of_prediction):
