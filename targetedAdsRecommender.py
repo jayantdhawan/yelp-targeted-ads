@@ -31,7 +31,7 @@ def get_predicted_rating_for_business(user_id, business_id):
 		r_ir = rating
 		b_ur = get_b_ur(similar_user_id, business_id)
 		predicted_rating += ((r_ir - b_ur) * get_similarity(user_id, similar_user_id))
-	#predicted_rating  = predicted_rating / len(similar_users)
+	predicted_rating  = predicted_rating / len(similar_users)
 	return predicted_rating + get_b_ur(user_id, business_id)
 
 def get_top_predicted_list(user_id, business_to_check, number_of_prediction):
