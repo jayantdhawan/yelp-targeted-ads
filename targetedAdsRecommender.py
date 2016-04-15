@@ -33,9 +33,15 @@ def get_similarity_category(user1, user2):
 
 	user1_category = get_category_map(user1, get_visited_business_for_user(user1))	
 	user2_category = get_category_map(user2, get_visited_business_for_user(user2))
+	common_category = list(Set(user1_category.keys()).intersection(Set(user2_category.keys())))
+	
+	if len(common_category) == 0:
+		return 0.0
 
-	print user2_category
-	return 0
+	similarity = 0.0
+	for category in common_category:
+		similarity += ((user1_category[category][0] / user1_category[category][1]) - (user2_category[category][0] / user2_category[category][1])) ** 2
+	return similarity/(len(common_category) * 25)
 
 def get_similarity(user_1, user_2):
 	business_for_user_1 = get_visited_business_for_user(user_1)
@@ -46,7 +52,7 @@ def get_similarity(user_1, user_2):
 	similarity = 0.0
 	for business_id in common_business:
 		similarity += (get_rating(user_1, business_id) - get_rating(user_2, business_id)) ** 2
-	return similarity/( len(common_business) * 25)
+	return similarity/(len(common_business) * 25)
 
 def get_predicted_rating_for_business(user_id, business_id):
 	try:
@@ -82,7 +88,6 @@ def get_nearby_business(location):
 	lat_lng_json = loc.get_latitude_and_longitude_by_location(location)
 	business_id_list = loc.get_nearby_business_id(lat_lng_json['lat'], lat_lng_json['lng'], 5)
 	return business_id_list
-	# return data.business_rating.keys()
 
 def main():
 	if len(sys.argv) != 4:
@@ -94,7 +99,7 @@ def main():
 	visited_business = get_visited_business_for_user(user_id)
 	business_to_check = Set(get_nearby_business(location)) - visited_business
 	for business in get_top_predicted_list(user_id, list(business_to_check), number_of_prediction):
-		print str(business[0]) + "\t" + data.business_info[business[1]]['name'] + "\t\t\t" + data.business_info[business[1]]['full_address']
+		print str(business[0]) + "\t" + data.business_info[business[1]]['name'].ljust(40) + "\t" + data.business_info[business[1]]['full_address']
 
 if __name__ == "__main__":
    main()
