@@ -6,8 +6,8 @@ def user_to_restaurants(review_file):
 	with open(review_file, 'r') as f:
 		for line in f:
 			review = json.loads(line)
-			user_id = review['user_id']
-			business_id = review['business_id']
+			user_id = str(review['user_id'])
+			business_id = str(review['business_id'])
 			if isinstance(review['stars'], int):
 				mapping[user_id][business_id] = review['stars']
 		with open('user_to_restaurants.json', 'w') as output:
@@ -22,8 +22,8 @@ def restaurants_to_user(review_file):
 	with open(review_file, 'r') as f:
 		for line in f:
 			review = json.loads(line)
-			user_id = review['user_id']
-			business_id = review['business_id']
+			user_id = str(review['user_id'])
+			business_id = str(review['business_id'])
 			if isinstance(review['stars'], int):
 				mapping[business_id][user_id] = review['stars']
 			# mapping[business_id][]
@@ -42,12 +42,12 @@ def category_to_business(restaurant_file, categories_file, output):
 		for line in f:
 			json_object = json.loads(line)
 			for category in json_object['categories']:
-				mapping[category].append(json_object['business_id'])
+				mapping[str(category)].append(str(json_object['business_id']))
 	with open(output, 'w') as f:
 		for category, business_ids in mapping.items():
 			if category in categories:
-				line = {'category': category, 'business_id': business_ids}
-				f.write(str(line) + '\n')
+				line = json.dumps({'category': category, 'business_id': business_ids})
+				f.write(line + '\n')
 
 
 if __name__ == "__main__":
