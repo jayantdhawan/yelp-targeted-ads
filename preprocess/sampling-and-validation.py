@@ -32,13 +32,13 @@ def get_top_X(val_filename):
 
 def main():
 
-	input_filename = "../data/yelp_academic_dataset_review.json"
-	trn_filname = "../data/yelp_academic_dataset_review_train.json"
-	val_filename = "../data/yelp_academic_dataset_review_validation.json"
+	input_filename = "/Users/keleigong/Downloads/yelp_dataset_challenge_academic_dataset/restaurant_reviews.json"
+	trn_filname = "/Users/keleigong/Downloads/yelp_dataset_challenge_academic_dataset/yelp_academic_dataset_review_train.json"
+	val_filename = "/Users/keleigong/Downloads/yelp_dataset_challenge_academic_dataset/yelp_academic_dataset_review_validation.json"
 
 	# Number of lines in the input data file
 	# Pre-determined to make things fast, using "wc -l data/yelp_academic_dataset_review.json"
-	nlines = 2225213
+	nlines = 1599141
 
 
 

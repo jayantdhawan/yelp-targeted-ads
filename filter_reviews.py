@@ -22,7 +22,7 @@ def read_categories(file):
 
 def read_restaurants(file, categories):
 	restaurants = dict()
-	restaurants_file = open('restaurants.json', 'w')
+	restaurants_file = open('preprocess/restaurants.json', 'w')
 	with open(file, 'r') as f:
 		for line in f:
 			# json_line = f.readline()
@@ -39,7 +39,6 @@ def read_restaurants(file, categories):
 	return restaurants
 
 
-
 def read_reviews(file, restaurants):
 	global dataset_path
 	with open(file, 'r') as f:
@@ -47,7 +46,7 @@ def read_reviews(file, restaurants):
 		# line = f.readline()
 		# json_line = json.loads(line)
 		# print(json_line['business_id'])
-		restaurant_reviews = open('restaurant_reviews_train.json', 'w')
+		restaurant_reviews = open('preprocess/restaurant_reviews_validation.json', 'w')
 		count = 0
 		for line in f:
 			review = json.loads(line)
@@ -70,5 +69,5 @@ if __name__ == '__main__':
 	categories = read_categories('preprocess/categories-filtered.txt')
 	print(len(categories))
 	restaurants = read_restaurants(file, categories)
-	read_reviews(dataset_path + 'yelp_academic_dataset_review_train.json', restaurants)
+	read_reviews(dataset_path + 'yelp_academic_dataset_review_validation.json', restaurants)
 
