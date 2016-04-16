@@ -42,7 +42,6 @@ Wine Bars
 Canadian (New)
 Korean
 Specialty Food
-Lounges
 Latin American
 German
 Gluten-Free
@@ -87,9 +86,7 @@ Taiwanese
 Lebanese
 Persian/Iranian
 African
-Food Delivery Services
 Scottish
-Street Vendors
 Kebab
 Cuban
 Brazilian
@@ -129,7 +126,6 @@ Arabian
 Baden
 Shaved Ice
 Scandinavian
-Chicken Shop
 Malaysian
 Patisserie/Cake Shop
 Cambodian
@@ -141,7 +137,6 @@ Gelato
 Delicatessen
 Puerto Rican
 Irish Pub
-Gay Bars
 Serbo Croatian
 Teppanyaki
 Beer Bar
@@ -154,7 +149,6 @@ Dominican
 Bangladeshi
 Burmese
 Wineries
-Art Galleries
 Curry Sausage
 Pasta Shops
 Sri Lankan
