@@ -94,7 +94,7 @@ def get_visited_business_for_user(user_id):
 def get_nearby_business(location):
 	# Return list of business_id
 	lat_lng_json = loc.get_latitude_and_longitude_by_location(location)
-	business_id_list = loc.get_nearby_business_id(lat_lng_json['lat'], lat_lng_json['lng'], 5)
+	business_id_list = loc.get_nearby_business_id(lat_lng_json['lat'], lat_lng_json['lng'], 15)
 	return business_id_list
 
 def main():

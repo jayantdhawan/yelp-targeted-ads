@@ -7,7 +7,7 @@ category_to_business = {}
 business_info = defaultdict(dict)
 
 def load_u():
-	with open("preprocess/mu.csv", 'rb') as csvfile:
+	with open("preprocess/mu_train.csv", 'rb') as csvfile:
 		u_value_file = csv.reader(csvfile, delimiter=',')
 		u_value_file.next()
 		for row in u_value_file:
@@ -15,7 +15,7 @@ def load_u():
 	return None
 
 def load_user_rating():
-	with open("preprocess/user_avg_ratings.csv", 'rb') as csvfile:
+	with open("preprocess/user_avg_ratings_train.csv", 'rb') as csvfile:
 		user_rating_file = csv.reader(csvfile, delimiter=',')
 		user_rating_file.next()
 		user_rating = {}
@@ -25,7 +25,7 @@ def load_user_rating():
 	return None
 
 def load_business_rating():
-	with open("preprocess/restaurants_avg_ratings.csv", 'rb') as csvfile:
+	with open("preprocess/restaurants_avg_ratings_train.csv", 'rb') as csvfile:
 		business_rating_file = csv.reader(csvfile, delimiter=',')
 		business_rating_file.next()
 		business_rating = {}
