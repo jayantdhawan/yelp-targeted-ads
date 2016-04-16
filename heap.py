@@ -27,7 +27,6 @@ class Heap(object):
         if len(self._heap) == self.size + 1:
             heapq.heappop(self._heap)
 
-    
     def pop(self):
         """ Returns the item with lowest priority. """
         item = heapq.heappop(self._heap) # (prio, item)[1] == item
@@ -46,3 +45,6 @@ class Heap(object):
             return self.pop()
         except IndexError:
             raise StopIteration
+
+    def get_list(self):
+        return self._heap

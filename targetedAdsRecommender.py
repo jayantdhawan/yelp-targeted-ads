@@ -4,8 +4,10 @@ import sys
 from sets import Set
 from heap import Heap
 
+sim_type = 0
+
 def get_rating(user_id, business_id):
-	all_business = data.user_to_business[user_id]
+	all_business = data.user_to_business_train[user_id]
 	for (business, rating) in all_business:
 		if business == business_id:
 			return rating
@@ -43,7 +45,7 @@ def get_similarity_category(user1, user2):
 		similarity += ((user1_category[category][0] / user1_category[category][1]) - (user2_category[category][0] / user2_category[category][1])) ** 2
 	return similarity/(len(common_category) * 25)
 
-def get_similarity(user_1, user_2):
+def get_similarity_business(user_1, user_2):
 	business_for_user_1 = get_visited_business_for_user(user_1)
 	business_for_user_2 = get_visited_business_for_user(user_2)
 	common_business = list(business_for_user_1.intersection(business_for_user_2))
@@ -54,15 +56,21 @@ def get_similarity(user_1, user_2):
 		similarity += (get_rating(user_1, business_id) - get_rating(user_2, business_id)) ** 2
 	return similarity/(len(common_business) * 25)
 
+def get_similarity(user_1, user_2):
+	if sim_type == 0:
+		return get_similarity_business(user_1, user_2)
+	else:
+		return get_similarity_category(user_1, user_2)
+
 def get_predicted_rating_for_business(user_id, business_id):
 	try:
-		similar_users = data.business_to_user[business_id]
+		similar_users = data.business_to_user_train[business_id]
 		predicted_rating = 0.0
 		
 		for (similar_user_id, rating) in similar_users:
 			r_ir = rating
 			b_ur = get_b_ur(similar_user_id, business_id)
-			predicted_rating += ((r_ir - b_ur) * get_similarity_category(user_id, similar_user_id))
+			predicted_rating += ((r_ir - b_ur) * get_similarity(user_id, similar_user_id))
 		predicted_rating  = predicted_rating / len(similar_users)
 		return predicted_rating + get_b_ur(user_id, business_id)
 	except:
@@ -74,10 +82,10 @@ def get_top_predicted_list(user_id, business_to_check, number_of_prediction):
 		predicted_rating = get_predicted_rating_for_business(user_id, business_id)
 		if predicted_rating:
 			top_business.push(round(predicted_rating, 3), business_id)
-	return top_business
+	return sorted(top_business.get_list(), reverse = True, key = lambda x: x[0])
 
 def get_visited_business_for_user(user_id):
-	list_tuple = data.user_to_business[user_id]
+	list_tuple = data.user_to_business_train[user_id]
 	visited_business = Set([]) 
 	for record in list_tuple:
 		visited_business.add(record[0])
@@ -90,12 +98,15 @@ def get_nearby_business(location):
 	return business_id_list
 
 def main():
-	if len(sys.argv) != 4:
-		print "python targetedAdsRecommender.py <encrypted_user_id> <Number of Predictions> <location format(use underline between words: 530 Brookline Blvd PA 15226)>"
+	global sim_type
+	if len(sys.argv) != 5:
+		print "python targetedAdsRecommender.py <encrypted_user_id> <Number of Predictions> <location format:530 Brookline Blvd PA 15226)> <Similarity Type 0(Business) | 1(Cluster)>"
 		exit(1)
 	user_id = sys.argv[1]
 	number_of_prediction = int(sys.argv[2])
 	location = sys.argv[3]
+	sim_type = int(sys.argv[4])
+
 	visited_business = get_visited_business_for_user(user_id)
 	business_to_check = Set(get_nearby_business(location)) - visited_business
 	for business in get_top_predicted_list(user_id, list(business_to_check), number_of_prediction):
