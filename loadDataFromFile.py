@@ -7,6 +7,7 @@ user_to_business = {}
 business_to_user = {}
 category_to_business = {}
 business_info = defaultdict(dict)
+
 def load_u():
 	with open("preprocess/mu.csv", 'rb') as csvfile:
 		u_value_file = csv.reader(csvfile, delimiter=',')
@@ -60,13 +61,15 @@ def load_business_info():
 		for line in f:
 			json_object = json.loads(line)
 			full_address = json_object['full_address']
-			idx = address.rindex(',')
-			address = '_'.join(full_address[0:idx].strip().split())
-			zip_code = '_'.join(full_address[idx+1:].strip().split())
-			business_info['business_id'] = {'categories': json_object['categories'], \
-									   'full_address': (address, zip_code)),
+
+			# idx = full_address.rindex(',')
+			# address = '_'.join(full_address[0:idx].strip().split())
+			# zip_code = '_'.join(full_address[idx+1:].strip().split())
+			business_info[json_object['business_id']] = {'categories': json_object['categories'], \
+									   'full_address': full_address.replace("\n"," "),
 									   'latitude': json_object['latitude'],
-									   'longitude': json_object['longitude']}
+									   'longitude': json_object['longitude'],
+									   'name': json_object['name']}
 	return None
 
 def load_category_to_business_mapping():
@@ -87,6 +90,6 @@ load_user_to_business_mapping()
 load_business_info()
 load_category_to_business_mapping()
 
-u_ = load_u() 
+u_ = round(load_u(), 3) 
 user_rating = load_user_rating()
 business_rating = load_business_rating()
