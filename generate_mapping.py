@@ -10,7 +10,7 @@ def user_to_restaurants(review_file):
 			business_id = str(review['business_id'])
 			if isinstance(review['stars'], int):
 				mapping[user_id][business_id] = review['stars']
-		with open('user_to_restaurants.json', 'w') as output:
+		with open('user_to_restaurants_validation.json', 'w') as output:
 			# json.dump(mapping, output)
 			for user_id, value in mapping.items():
 				line = json.dumps({'user_id': user_id, 'business': mapping[user_id]})
@@ -27,7 +27,7 @@ def restaurants_to_user(review_file):
 			if isinstance(review['stars'], int):
 				mapping[business_id][user_id] = review['stars']
 			# mapping[business_id][]
-		with open('restaurants_to_user.json', 'w') as output:
+		with open('restaurants_to_user_validation.json', 'w') as output:
 			# json.dump(mapping, output)
 			for business_id, value in mapping.items():
 				line = json.dumps({'business_id': business_id, 'user_id': mapping[business_id]})
@@ -52,6 +52,7 @@ def category_to_business(restaurant_file, categories_file, output):
 
 if __name__ == "__main__":
 	dataset_path = "/Users/keleigong/Downloads/yelp_dataset_challenge_academic_dataset/"
-	user_to_restaurants(dataset_path + 'restaurant_reviews.json')
-	restaurants_to_user(dataset_path + 'restaurant_reviews.json')
+	user_to_restaurants(dataset_path + 'restaurant_reviews_validation.json')
+	restaurants_to_user(dataset_path + 'restaurant_reviews_validation.json')
 	# category_to_business('restaurants.json', 'preprocess/categories-filtered.txt', 'category_to_business.json')
+
