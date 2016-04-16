@@ -44,6 +44,6 @@ def calculate_mu(review_file):
 			output.write("%s,%s,%s\n" %(res, count, res / count))
 if __name__ == '__main__':
 	# dataset_path = "/Users/keleigong/Downloads/yelp_dataset_challenge_academic_dataset/"
-	# users_avg_ratings('preprocess/restaurant_reviews_train.json')
-	# restaurants_avg_ratings('preprocess/restaurant_reviews_train.json')
-	calculate_mu('preprocess/restaurant_reviews_train.json')
+	users_avg_ratings('preprocess/restaurant_reviews_train.json')
+	restaurants_avg_ratings('preprocess/restaurant_reviews_train.json')
+	# calculate_mu('preprocess/restaurant_reviews_train.json')
