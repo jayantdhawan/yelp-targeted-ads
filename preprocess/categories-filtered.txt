@@ -1,7 +1,6 @@
 Restaurants
 Fast Food
 Pizza
-Nightlife
 Mexican
 Bars
 American (Traditional)
@@ -140,7 +139,6 @@ Irish Pub
 Serbo Croatian
 Teppanyaki
 Beer Bar
-Local Flavor
 Shanghainese
 Laotian
 Egyptian
