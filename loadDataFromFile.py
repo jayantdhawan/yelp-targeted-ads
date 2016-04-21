@@ -10,6 +10,15 @@ from collections import defaultdict
 category_to_business = {}
 business_info = defaultdict(dict)
 
+business_to_user_train = {}
+user_to_business_train = {}
+business_to_user_validation = {}
+user_to_business_validation = {}
+u_ = 0.0
+user_rating = {}
+business_rating = {}
+
+
 # Function to load the u (average rating by all users for all rasturants)
 def load_u():
 	with open("preprocess/mu_train.csv", 'rb') as csvfile:
@@ -85,14 +94,24 @@ def load_category_to_business_mapping():
 		return category_to_business
 	return None
 
-business_to_user_train = load_business_to_user_mapping("preprocess/restaurants_to_user_train.json")
-user_to_business_train = load_user_to_business_mapping("preprocess/user_to_restaurants_train.json")
-business_to_user_validation = load_business_to_user_mapping("preprocess/restaurants_to_user_validation.json")
-user_to_business_validation = load_user_to_business_mapping("preprocess/user_to_restaurants_validation.json")
+def load_all_data_from_file():
 
-load_business_info()
-load_category_to_business_mapping()
+	global business_to_user_train
+	global user_to_business_train
+	global business_to_user_validation
+	global user_to_business_validation
+	global u_
+	global user_rating
+	global business_rating 
 
-u_ = round(load_u(), 3) 
-user_rating = load_user_rating()
-business_rating = load_business_rating()
+	business_to_user_train = load_business_to_user_mapping("preprocess/restaurants_to_user_train.json")
+	user_to_business_train = load_user_to_business_mapping("preprocess/user_to_restaurants_train.json")
+	business_to_user_validation = load_business_to_user_mapping("preprocess/restaurants_to_user_validation.json")
+	user_to_business_validation = load_user_to_business_mapping("preprocess/user_to_restaurants_validation.json")
+
+	load_business_info()
+	load_category_to_business_mapping()
+
+	u_ = round(load_u(), 3)
+	user_rating = load_user_rating()
+	business_rating = load_business_rating()

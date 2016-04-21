@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 This script runs the main algorithm
 """
@@ -127,10 +129,13 @@ def main():
 	global sim_type
 
 	if not (len(sys.argv) == 2 or len(sys.argv) == 5):
-		print "python targetedAdsRecommender.py <encrypted_user_id> <Number of Predictions> <location format:530 Brookline Blvd PA 15226)> <Similarity Type 0(Business) | 1(Cluster)>"
-		print "For Calculate RMSE: python <Similarity Type 0(Business) | 1(Cluster)>"
+		print "Usage:\n"
+		print "For top predictions:\ntargetedAdsRecommender.py <encrypted user id> <number of predictions> <location in double quotes> <similarity type: 0|1>"
+		print "\nFor calculating RMSE:\ntargetedAdsRecommender.py <similarity type: 0|1>\n"
 		sys.exit()
 	
+	data.load_all_data_from_file()
+
 	if len(sys.argv) == 2:
 		sim_type = int(sys.argv[1])
 		RMSE = 0.0
