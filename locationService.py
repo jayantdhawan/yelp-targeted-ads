@@ -1,8 +1,13 @@
+"""
+Script to search the restaurants in nearby location using the google API 
+"""
+
 import requests
 import json
 import math
 import time
 
+# Function to return the latitude and longitude of a given location 
 def get_latitude_and_longitude_by_location(location):
 	google_api = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location
 	response = requests.get(google_api)
@@ -10,6 +15,7 @@ def get_latitude_and_longitude_by_location(location):
 	lat_lng_json = resp_json_payload['results'][0]['geometry']['location']
 	return lat_lng_json
 
+# Function to return the nearby businesses
 def get_nearby_business_id(lat, lng, distance):
 	nearby_business_ids = []
 	with open("preprocess/restaurants.json", 'r') as business_file:
