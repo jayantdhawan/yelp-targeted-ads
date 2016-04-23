@@ -1,6 +1,11 @@
+"""
+Generate mappings user to list of businesses, business to list of users, category to list on business from the review file for training and validation and store it in file as a json object
+"""
+
 import json
 from collections import defaultdict
 
+# User to list of businesses.
 def user_to_restaurants(review_file, end):
 	# review_file += end
 	mapping = defaultdict(dict)
@@ -17,7 +22,7 @@ def user_to_restaurants(review_file, end):
 				line = json.dumps({'user_id': user_id, 'business': mapping[user_id]})
 				output.write(line + '\n')
 
-
+# Business to list of Users
 def restaurants_to_user(review_file, end):
 	# review_file += end
 	mapping = defaultdict(dict)
@@ -35,6 +40,7 @@ def restaurants_to_user(review_file, end):
 				line = json.dumps({'business_id': business_id, 'user_id': mapping[business_id]})
 				output.write(line + '\n')
 
+# Category to list of business
 def category_to_business(restaurant_file, categories_file, output):
 	with open(categories_file, 'r') as f:
 		categories = f.read().strip().split('\n')

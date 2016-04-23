@@ -1,6 +1,7 @@
 import json
 from collections import Counter
 
+# Reading all the categories from all the businesses. 
 def read_business(file):
 	categories = Counter()
 	res = open('categories.txt', 'w')
@@ -12,7 +13,6 @@ def read_business(file):
 			res.write('%s\t%s\n' % (category[1], category[0]))
 		# print categories.most_common(10)
 		res.close()
-
 # business = read_business('restaurants.json')
 
 def read_categories(file):
@@ -20,6 +20,7 @@ def read_categories(file):
 	with open(file, 'r') as f:
 		return f.read().strip().split('\n')
 
+# Filtering only the rasturants out of all the businesses.
 def read_restaurants(file, categories):
 	restaurants = dict()
 	restaurants_file = open('preprocess/restaurants.json', 'w')
@@ -38,7 +39,7 @@ def read_restaurants(file, categories):
 	print(len(restaurants.keys()))
 	return restaurants
 
-
+# Filtering reviews only for resturants out of all the businesses.
 def read_reviews(file, restaurants):
 	global dataset_path
 	with open(file, 'r') as f:
@@ -64,8 +65,9 @@ def read_reviews(file, restaurants):
 		# print(len(restaurant_reviews))
 
 if __name__ == '__main__':
-	dataset_path = "/Users/keleigong/Downloads/yelp_dataset_challenge_academic_dataset/"
+	dataset_path = "data/"
 	file = dataset_path + 'yelp_academic_dataset_business.json'
+	# categories-filtered list only rasturants category not any other business category.
 	categories = read_categories('preprocess/categories-filtered.txt')
 	print(len(categories))
 	restaurants = read_restaurants(file, categories)

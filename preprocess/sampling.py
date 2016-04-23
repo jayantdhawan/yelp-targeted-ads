@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 
+"""
+Divide the reviews into training and validation 
+"""
+
 import os
 import json
 from sets import Set
 import numpy as np
+import random
 
-
+# Divide the datasert into training and validation in 75 - 25 % ratio
 def sample(input_filename, trn_filename, val_filename, nlines):
 
 	if os.path.isfile(trn_filename) or os.path.isfile(val_filename):
@@ -17,11 +22,11 @@ def sample(input_filename, trn_filename, val_filename, nlines):
 	otrn = open(trn_filename, "w")
 	oval = open(val_filename, "w")
 
-	choices = np.random.choice([0, 1], size=(nlines,))
-
+	# choice = np.random.choice([range(1,11)], size=(nlines,))
 	i = 0
 	for l in f.readlines():
-		if choices[i] == 1:
+		choice = random.choice(range(1, 101))
+		if choice < 76:
 			otrn.write(l)
 		else:
 			oval.write(l)

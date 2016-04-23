@@ -1,3 +1,7 @@
+"""
+This module is to load data from pre-processed file in various Data Structure to be used in the algorithm 
+"""
+
 import json
 import csv
 import thread
@@ -6,6 +10,16 @@ from collections import defaultdict
 category_to_business = {}
 business_info = defaultdict(dict)
 
+business_to_user_train = {}
+user_to_business_train = {}
+business_to_user_validation = {}
+user_to_business_validation = {}
+u_ = 0.0
+user_rating = {}
+business_rating = {}
+
+
+# Function to load the u (average rating by all users for all rasturants)
 def load_u():
 	with open("preprocess/mu_train.csv", 'rb') as csvfile:
 		u_value_file = csv.reader(csvfile, delimiter=',')
@@ -14,6 +28,7 @@ def load_u():
 			return float(row[2])
 	return None
 
+# Average ratings by all users
 def load_user_rating():
 	with open("preprocess/user_avg_ratings_train.csv", 'rb') as csvfile:
 		user_rating_file = csv.reader(csvfile, delimiter=',')
@@ -24,6 +39,7 @@ def load_user_rating():
 		return user_rating
 	return None
 
+# Average ratings to all resturants
 def load_business_rating():
 	with open("preprocess/restaurants_avg_ratings_train.csv", 'rb') as csvfile:
 		business_rating_file = csv.reader(csvfile, delimiter=',')
@@ -34,6 +50,7 @@ def load_business_rating():
 		return business_rating
 	return None
 
+# Mapping from User to list of tuples where each tuple represent the business Id, Rating given by the user.
 def load_user_to_business_mapping(file_name):
 	user_to_business = {}
 	with open(file_name, 'r') as user_to_business_file:
@@ -43,6 +60,7 @@ def load_user_to_business_mapping(file_name):
 		return user_to_business
 	return None
 
+# Mapping from Business to list of tuples where each tuple represent the User Id, Rating given to the resturant.
 def load_business_to_user_mapping(file_name):
 	business_to_user = {}
 	with open(file_name, 'r') as business_to_user_file:
@@ -52,6 +70,7 @@ def load_business_to_user_mapping(file_name):
 		return business_to_user
 	return None
 
+# Mapping from Business Id to other information about the business
 def load_business_info():
 	global business_info
 	with open("preprocess/restaurants.json", 'r') as f:
@@ -65,6 +84,7 @@ def load_business_info():
 									   'name': json_object['name']}
 	return None
 
+# Mapping from category to list of Business Id belongs to that category
 def load_category_to_business_mapping():
 	global category_to_business
 	with open("preprocess/category_to_business.json", 'r') as f:
@@ -74,15 +94,24 @@ def load_category_to_business_mapping():
 		return category_to_business
 	return None
 
+def load_all_data_from_file():
 
-business_to_user_train = load_business_to_user_mapping("preprocess/restaurants_to_user_train.json")
-user_to_business_train = load_user_to_business_mapping("preprocess/user_to_restaurants_train.json")
-business_to_user_validation = load_business_to_user_mapping("preprocess/restaurants_to_user_validation.json")
-user_to_business_validation = load_user_to_business_mapping("preprocess/user_to_restaurants_validation.json")
+	global business_to_user_train
+	global user_to_business_train
+	global business_to_user_validation
+	global user_to_business_validation
+	global u_
+	global user_rating
+	global business_rating 
 
-load_business_info()
-load_category_to_business_mapping()
+	business_to_user_train = load_business_to_user_mapping("preprocess/restaurants_to_user_train.json")
+	user_to_business_train = load_user_to_business_mapping("preprocess/user_to_restaurants_train.json")
+	business_to_user_validation = load_business_to_user_mapping("preprocess/restaurants_to_user_validation.json")
+	user_to_business_validation = load_user_to_business_mapping("preprocess/user_to_restaurants_validation.json")
 
-u_ = round(load_u(), 3) 
-user_rating = load_user_rating()
-business_rating = load_business_rating()
+	load_business_info()
+	load_category_to_business_mapping()
+
+	u_ = round(load_u(), 3)
+	user_rating = load_user_rating()
+	business_rating = load_business_rating()
